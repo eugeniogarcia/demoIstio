@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment1
+  labels:
+    app: webapp
+    version: "3.1"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+        version: "3.1"
+    spec:
+      containers:
+      - name: webapp
+        image: pruebacontenedor.azurecr.io/web-app:3.1
+        env:
+        - name: ARRANQUE
+          value: "10"
+        - name: VIDA
+          value: "3600"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 20
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 30
+        resources:
+          limits:
+            cpu: 50m
+            memory: 40Mi
+          requests:
+            cpu: 50m
+            memory: 20Mi
+      imagePullSecrets:
+      - name: milocalregistry

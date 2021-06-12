@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: forward
+spec:
+  hosts:
+    - webservice
+  gateways :
+  - mesh
+  http:
+  - route:
+    - destination:
+        host: webservice
+        subset: v1

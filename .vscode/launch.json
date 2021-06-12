@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-IstioFrontendApplication<istio-frontend>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "istio.IstioFrontendApplication",
+            "projectName": "istio-frontend",
+            "args": ""
+        }
+    ]
+}
